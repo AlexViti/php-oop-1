@@ -50,10 +50,13 @@ class Movie {
     try {
       if ($rating < 0 || $rating > 10) {
         throw new Exception('Rating must be between 0 and 10');
+      } else {
+        $this->rating = $rating;
       }
-      $this->rating = $rating;
     } catch (Exception $e) {
       echo $e->getMessage();
+      $trace = $e->getTraceAsString();
+      echo '<br>' . nl2br($trace);
     } 
   }
 
@@ -72,7 +75,7 @@ class Movie {
 
 $theGodFather = new Movie('The Godfather', 9, new DateTime('1972-03-24'), 'Francis Ford Coppola', ['Marlon Brando', 'Al Pacino', 'James Caan', 'Diane Keaton', 'Robert Duvall']);
 $zoolander = new Movie('Zoolander', 8, new DateTime('2001-9-28'), 'Ben Stiller', ['Ben Stiller', 'Owen Wilson', 'Will Ferrell', 'Christine Taylor']);
-$scarface = new Movie('Scarface', 11, new DateTime('1983-12-01'), 'Brian De Palma', ['Al Pacino', 'Steven Bauer', 'Michelle Pfeiffer', 'Mary Elizabeth Mastrantonio']); // 11 of rating is still too low
+$scarface = new Movie('Scarface', 11, new DateTime('1983-12-01'), 'Brian De Palma', ['Al Pacino', 'Steven Bauer', 'Michelle Pfeiffer', 'Mary Elizabeth Mastrantonio']); // 11 of rating is still too low - Error done on purpose for the sake of the exercise
 
 $movies = [$theGodFather, $zoolander, $scarface];
 ?>
