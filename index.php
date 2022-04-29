@@ -7,14 +7,16 @@ class Movie {
   private string $director;
   private array $cast;
   
+  // Constructor
   public function __construct(string $title, ?int $rating = null, ?DateTime $releaseDate, ?string $director = null, ?array $cast = []) {
-    $this->title = $title;
-    $this->rating = $rating;
-    $this->releaseDate = $releaseDate;
-    $this->director = $director;
-    $this->cast = $cast;
+    $this->setTitle($title);
+    $this->setRating($rating);
+    $this->setReleaseDate($releaseDate);
+    $this->setDirector($director);
+    $this->setCast($cast);
   }
 
+  // GETTERS
   public function getTitle(): string {
     return $this->title;
   }
@@ -38,12 +40,41 @@ class Movie {
   public function getCastAsString(): string {
     return implode(', ', $this->cast);
   }
+
+  // SETTERS
+  public function setTitle(string $title): void {
+    $this->title = $title;
+  }
+
+  public function setRating(int $rating): void {
+    try {
+      if ($rating < 0 || $rating > 10) {
+        throw new Exception('Rating must be between 0 and 10');
+      }
+      $this->rating = $rating;
+    } catch (Exception $e) {
+      echo $e->getMessage();
+    } 
+  }
+
+  public function setReleaseDate(DateTime $releaseDate): void {
+    $this->releaseDate = $releaseDate;
+  }
+
+  public function setDirector(string $director): void {
+    $this->director = $director;
+  }
+
+  public function setCast(array $cast): void {
+    $this->cast = $cast;
+  }
 }
 
-$theGodFather = new Movie('The Godfather', 9, new DateTime('1972-03-24'), 'Francis Ford Coppola', ['Marlon Brando', 'Al Pacino', 'James Caan']);
-$zoolander = new Movie('Zoolander', 8, new DateTime('2001-03-24'), 'Ben Stiller', ['Ben Stiller', 'Owen Wilson', 'Will Ferrell', 'Christine Taylor']);
+$theGodFather = new Movie('The Godfather', 9, new DateTime('1972-03-24'), 'Francis Ford Coppola', ['Marlon Brando', 'Al Pacino', 'James Caan', 'Diane Keaton', 'Robert Duvall']);
+$zoolander = new Movie('Zoolander', 8, new DateTime('2001-9-28'), 'Ben Stiller', ['Ben Stiller', 'Owen Wilson', 'Will Ferrell', 'Christine Taylor']);
+$scarface = new Movie('Scarface', 11, new DateTime('1983-12-01'), 'Brian De Palma', ['Al Pacino', 'Steven Bauer', 'Michelle Pfeiffer', 'Mary Elizabeth Mastrantonio']); // 11 of rating is still too low
 
-$movies = [$theGodFather, $zoolander];
+$movies = [$theGodFather, $zoolander, $scarface];
 ?>
 
 <!DOCTYPE html>
