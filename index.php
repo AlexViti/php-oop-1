@@ -41,6 +41,9 @@ class Movie {
 }
 
 $theGodFather = new Movie('The Godfather', 9, new DateTime('1972-03-24'), 'Francis Ford Coppola', ['Marlon Brando', 'Al Pacino', 'James Caan']);
+$zoolander = new Movie('Zoolander', 8, new DateTime('2001-03-24'), 'Ben Stiller', ['Ben Stiller', 'Owen Wilson', 'Will Ferrell', 'Christine Taylor']);
+
+$movies = [$theGodFather, $zoolander];
 ?>
 
 <!DOCTYPE html>
@@ -52,20 +55,14 @@ $theGodFather = new Movie('The Godfather', 9, new DateTime('1972-03-24'), 'Franc
   <title>Movie OOP</title>
 </head>
 <body>
-  <h2>
-    <?php echo $theGodFather->getTitle(); ?>
-  </h2>
-  <div>
-    Rating: <?php echo $theGodFather->getRating(); ?>
-  </div>
-  <div>
-    Release date: <?php echo $theGodFather->getReleaseDate(); ?>
-  </div>
-  <div>
-    Director: <?php echo $theGodFather->getDirector(); ?>
-  </div>
-  <div>
-    Cast: <?php echo $theGodFather->getCastAsString(); ?>
-  </div>
+  <?php
+  foreach ($movies as $movie) {
+    echo '<h2>' . $movie->getTitle() . '</h2>';
+    echo '<p>Rating: ' . $movie->getRating() . '</p>';
+    echo '<p>Release Date: ' . $movie->getReleaseDate() . '</p>';
+    echo '<p>Director: ' . $movie->getDirector() . '</p>';
+    echo '<p>Cast: ' . $movie->getCastAsString() . '</p>';
+  }
+  ?>
 </body>
 </html>
